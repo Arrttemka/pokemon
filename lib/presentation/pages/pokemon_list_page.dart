@@ -1,5 +1,3 @@
-// lib/presentation/pages/pokemon_list_page.dart
-
 import 'package:flutter/material.dart';
 import '../../domain/entities/pokemon_entity.dart';
 import '../mocks/pokemon_mock_data.dart';
@@ -8,12 +6,10 @@ import '../widgets/pokemon_card.dart';
 class PokemonListPage extends StatelessWidget {
    PokemonListPage({Key? key}) : super(key: key);
 
-  // Пока используем готовые моковые данные
   final List<PokemonEntity> pokemons = mockPokemons;
 
   @override
   Widget build(BuildContext context) {
-    // Цвета можно вынести в отдельный файл (палитру / тему), но пока оставим здесь для примера
     const backgroundColor = Color(0xFF3C2C2C);
     const cardColor = Color(0xFF4A3A3A);
     const textColor = Colors.white;
@@ -22,7 +18,6 @@ class PokemonListPage extends StatelessWidget {
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          // Прокрутка всей области
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
             child: Column(

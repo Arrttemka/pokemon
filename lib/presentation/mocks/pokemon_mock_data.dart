@@ -1,4 +1,3 @@
-
 import '../../domain/entities/pokemon_entity.dart';
 
 final List<PokemonEntity> mockPokemons = [

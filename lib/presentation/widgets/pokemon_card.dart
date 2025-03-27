@@ -1,5 +1,3 @@
-// lib/presentation/widgets/pokemon_card.dart
-
 import 'package:flutter/material.dart';
 import '../../domain/entities/pokemon_entity.dart';
 
@@ -26,7 +24,6 @@ class PokemonCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Имя покемона
             Expanded(
               child: Text(
                 pokemon.name,
@@ -37,7 +34,6 @@ class PokemonCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            // Картинка покемона
             Image.network(
               pokemon.imageUrl,
               width: 50,
