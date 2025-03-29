@@ -4,7 +4,7 @@ import '../mocks/pokemon_mock_data.dart';
 import '../widgets/pokemon_card.dart';
 
 class PokemonListPage extends StatelessWidget {
-   PokemonListPage({Key? key}) : super(key: key);
+  PokemonListPage({Key? key}) : super(key: key);
 
   final List<PokemonEntity> pokemons = mockPokemons;
 
