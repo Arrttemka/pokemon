@@ -1,6 +1,7 @@
 import '../../domain/entities/pokemon_entity.dart';
 
 final List<PokemonEntity> mockPokemons = [
+
   const PokemonEntity(
     id: 1,
     name: 'Bulbasaur',
