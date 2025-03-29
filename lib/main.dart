@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
     final mockPokemon = mockPokemonDetail;
 
     return MaterialApp(
-      title: 'Pokemon Demo',
+
+      title: 'PokeApp',
+      debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
