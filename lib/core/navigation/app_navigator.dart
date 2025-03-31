@@ -1,3 +1,4 @@
+// Файл: lib/core/navigation/app_navigator.dart
 import 'package:flutter/material.dart';
 import 'package:pokemon/core/navigation/app_routes.dart';
 import 'package:pokemon/core/navigation/route_arguments.dart';
@@ -8,20 +9,14 @@ class AppNavigator {
 
   AppNavigator({required this.navigatorKey});
 
-  BuildContext? get _context => navigatorKey.currentContext;
-
-  Future<void> navigateToPokemonDetails(PokemonEntity pokemon) async {
-    if (_context != null) {
-      await Navigator.of(_context!).pushNamed(
-        AppRoutes.pokemonDetails,
-        arguments: PokemonDetailsArguments(pokemon: pokemon),
-      );
-    }
+  Future<dynamic> navigateToPokemonDetails(PokemonEntity pokemon) {
+    return navigatorKey.currentState!.pushNamed(
+      AppRoutes.pokemonDetails,
+      arguments: PokemonDetailsArguments(pokemon: pokemon),
+    );
   }
 
   void goBack() {
-    if (_context != null && Navigator.of(_context!).canPop()) {
-      Navigator.of(_context!).pop();
-    }
+    navigatorKey.currentState!.pop();
   }
 }

@@ -9,32 +9,21 @@ class RouteGenerator {
     switch (settings.name) {
       case AppRoutes.pokemonList:
         return MaterialPageRoute(
-          builder: (_) => PokemonListPage(),
+          builder: (_) => const PokemonListPage(),
         );
-
       case AppRoutes.pokemonDetails:
         final args = settings.arguments as PokemonDetailsArguments;
         return MaterialPageRoute(
           builder: (_) => PokemonDetailsPage(pokemon: args.pokemon),
         );
-
       default:
-        return _errorRoute();
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
-  }
-
-  static Route<dynamic> _errorRoute() {
-    return MaterialPageRoute(
-        builder: (_) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Error'),
-            ),
-            body: const Center(
-              child: Text('Page not found'),
-            ),
-          );
-        }
-    );
   }
 }
