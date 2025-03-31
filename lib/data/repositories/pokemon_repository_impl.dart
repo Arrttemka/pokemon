@@ -21,56 +21,90 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<Either<Failure, List<PokemonEntity>>> getPokemonList(int offset, int limit) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remotePokemons = await remoteDataSource.getPokemonList(offset, limit);
+    try {
+      final isConnected = await networkInfo.isConnected;
 
-        final List<PokemonModel> detailedPokemons = [];
-        for (final pokemon in remotePokemons.results) {
+      if (isConnected) {
+        try {
+          final remotePokemons = await remoteDataSource.getPokemonList(offset, limit);
+
+          final List<PokemonModel> detailedPokemons = [];
+          for (final pokemon in remotePokemons.results) {
+            try {
+              final pokemonDetail = await remoteDataSource.getPokemonDetails(pokemon.id);
+              detailedPokemons.add(pokemonDetail);
+            } catch (e) {
+              continue;
+            }
+          }
+
+          await localDataSource.cachePokemonList(detailedPokemons);
+          return Right(detailedPokemons);
+        } on ServerException catch (e) {
           try {
-            final pokemonDetail = await remoteDataSource.getPokemonDetails(pokemon.id);
-            detailedPokemons.add(pokemonDetail);
-          } catch (e) {
-            continue;
+            final localPokemons = await localDataSource.getCachedPokemonList();
+            return Right(localPokemons);
+          } on CacheException {
+            return Left(ServerFailure(e.message));
           }
         }
-
-        await localDataSource.cachePokemonList(detailedPokemons);
-        return Right(detailedPokemons);
-      } on ServerException catch (e) {
-        return Left(ServerFailure(e.message));
+      } else {
+        try {
+          final localPokemons = await localDataSource.getCachedPokemonList();
+          return Right(localPokemons);
+        } on CacheException {
+          return Left(NetworkFailure.noConnection());
+        }
       }
-    } else {
-      try {
-        final localPokemons = await localDataSource.getCachedPokemonList();
-        return Right(localPokemons);
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } catch (e) {
+      if (e is Exception) {
+        return Left(UnexpectedFailure.fromException(e));
       }
+      return Left(UnexpectedFailure('An unexpected error occurred: $e'));
     }
   }
 
   @override
   Future<Either<Failure, PokemonEntity>> getPokemonDetails(int id) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remotePokemon = await remoteDataSource.getPokemonDetails(id);
-        await localDataSource.cachePokemonDetails(remotePokemon);
-        return Right(remotePokemon);
-      } on ServerException catch (e) {
-        return Left(ServerFailure(e.message));
-      }
-    } else {
-      try {
+    try {
+      final isConnected = await networkInfo.isConnected;
+
+      if (isConnected) {
+        try {
+          final remotePokemon = await remoteDataSource.getPokemonDetails(id);
+          await localDataSource.cachePokemonDetails(remotePokemon);
+          return Right(remotePokemon);
+        } on ServerException catch (e) {
+          final localPokemon = await localDataSource.getCachedPokemonDetails(id);
+          if (localPokemon != null) {
+            return Right(localPokemon);
+          } else {
+            return Left(ServerFailure(e.message));
+          }
+        }
+      } else {
         final localPokemon = await localDataSource.getCachedPokemonDetails(id);
         if (localPokemon != null) {
           return Right(localPokemon);
         } else {
-          return Left(CacheFailure('Pokemon details not found in cache'));
+          return Left(NetworkFailure.noConnection());
         }
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
       }
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.message));
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } on NetworkException catch (e) {
+      return Left(NetworkFailure(e.message));
+    } catch (e) {
+      if (e is Exception) {
+        return Left(UnexpectedFailure.fromException(e));
+      }
+      return Left(UnexpectedFailure('An unexpected error occurred: $e'));
     }
   }
 }
