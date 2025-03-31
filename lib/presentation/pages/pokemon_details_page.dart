@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/pokemon_entity.dart';
-import '../widgets/pokemon_detail_info.dart';
+import 'package:pokemon/domain/entities/pokemon_entity.dart';
+import 'package:pokemon/presentation/widgets/pokemon_back_button.dart';
+import 'package:pokemon/presentation/widgets/pokemon_detail_info.dart';
 
 class PokemonDetailsPage extends StatelessWidget {
   final PokemonEntity pokemon;
-
 
   const PokemonDetailsPage({
     Key? key,
@@ -18,9 +18,15 @@ class PokemonDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: const Text('Pokemon Detail'),
+        title: const Text(
+          'Pokemon Detail',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: backgroundColor,
         elevation: 0,
+        leading: const PokemonBackButton(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

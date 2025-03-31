@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'presentation/pages/pokemon_details_page.dart';
-import 'presentation/mocks/pokemon_mock_data.dart';
+import 'package:pokemon/core/di/injection_container.dart' as di;
+import 'package:pokemon/core/navigation/app_navigator.dart';
+import 'package:pokemon/core/navigation/app_routes.dart';
+import 'package:pokemon/core/navigation/route_generation.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.initDependencies();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    final mockPokemon = mockPokemonDetail;
-
     return MaterialApp(
-
-      title: 'PokeApp',
-      debugShowCheckedModeBanner: false,
-
+      title: 'Pokemon App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
       ),
-      home: PokemonDetailsPage(pokemon: mockPokemon),
+      navigatorKey: di.sl<GlobalKey<NavigatorState>>(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: AppRoutes.pokemonList,
       debugShowCheckedModeBanner: false,
     );
   }
