@@ -1,41 +1,60 @@
 import '../../domain/entities/pokemon_entity.dart';
 
 final List<PokemonEntity> mockPokemons = [
-
   const PokemonEntity(
     id: 1,
     name: 'Bulbasaur',
     imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+    types: ['grass', 'poison'],
+    weightInHg: 69,
+    heightInDm: 7,
   ),
   const PokemonEntity(
     id: 2,
     name: 'Ivysaur',
     imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png',
+    types: ['grass', 'poison'],
+    weightInHg: 130,
+    heightInDm: 10,
   ),
   const PokemonEntity(
     id: 3,
     name: 'Venusaur',
     imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
+    types: ['grass', 'poison'],
+    weightInHg: 1000,
+    heightInDm: 20,
   ),
   const PokemonEntity(
     id: 4,
     name: 'Charmander',
     imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+    types: ['fire'],
+    weightInHg: 85,
+    heightInDm: 6,
   ),
   const PokemonEntity(
     id: 5,
     name: 'Charmeleon',
     imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
+    types: ['fire'],
+    weightInHg: 190,
+    heightInDm: 11,
   ),
   const PokemonEntity(
     id: 6,
-    name: 'Charmeleon',
-    imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
+    name: 'Charizard',
+    imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png',
+    types: ['fire', 'flying'],
+    weightInHg: 905,
+    heightInDm: 17,
   ),
   const PokemonEntity(
     id: 7,
-    name: 'Charmeleon',
-    imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png',
+    name: 'Squirtle',
+    imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png',
+    types: ['water'],
+    weightInHg: 90,
+    heightInDm: 5,
   ),
-
 ];

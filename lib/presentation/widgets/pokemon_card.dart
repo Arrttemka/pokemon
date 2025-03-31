@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/pokemon_entity.dart';
+import '../pages/pokemon_details_page.dart';
+import 'pokemon_card_info.dart';
+import 'pokemon_card_image.dart';
 
 class PokemonCard extends StatelessWidget {
   final PokemonEntity pokemon;
@@ -15,34 +18,35 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: cardColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Text(
-                pokemon.name,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: textColor,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PokemonDetailsPage(pokemon: pokemon),
+          ),
+        );
+      },
+      child: Card(
+        color: cardColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: PokemonCardInfo(
+                  name: pokemon.name,
+                  id: pokemon.id,
+                  textColor: textColor,
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
-            ),
-            const SizedBox(width: 16),
-            Image.network(
-              pokemon.imageUrl,
-              width: 50,
-              height: 50,
-              errorBuilder: (_, __, ___) {
-                return const Icon(Icons.error, color: Colors.red);
-              },
-            ),
-          ],
+              const SizedBox(width: 16),
+              PokemonCardImage(imageUrl: pokemon.imageUrl),
+            ],
+          ),
         ),
       ),
     );
