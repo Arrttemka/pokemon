@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:pokemon/core/theme/app_colors.dart';
 
 class PokemonCardImage extends StatelessWidget {
   final String imageUrl;
@@ -41,12 +42,12 @@ class PokemonCardImage extends StatelessWidget {
     return Container(
       width: 50,
       height: 50,
-      color: Colors.grey[700],
+      color: AppColors.placeholderBackground,
       child: const Center(
         child: Icon(
           Icons.catching_pokemon,
           size: 24,
-          color: Colors.white54,
+          color: AppColors.iconColor,
         ),
       ),
     );

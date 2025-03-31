@@ -30,18 +30,15 @@ class PokemonListCubit extends Cubit<PokemonListState> {
 
       result.fold(
             (failure) {
-          if (_allPokemons.isNotEmpty) {
-            emit(PokemonListLoaded(
-              pokemons: _allPokemons,
-              hasReachedMax: true,
-            ));
-          } else {
-            emit(PokemonListError(failure: failure));
-          }
+          _hasReachedMax = true;
+          emit(PokemonListLoaded(
+            pokemons: _allPokemons,
+            hasReachedMax: _hasReachedMax,
+          ));
         },
             (newPokemons) {
           _offset += _limit;
-          _hasReachedMax = newPokemons.isEmpty;
+          _hasReachedMax = newPokemons.isEmpty || newPokemons.length < _limit;
           _allPokemons = [..._allPokemons, ...newPokemons];
           emit(PokemonListLoaded(
             pokemons: _allPokemons,
@@ -73,9 +70,10 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     result.fold(
           (failure) {
         if (_allPokemons.isNotEmpty && !refresh) {
+          _hasReachedMax = true;
           emit(PokemonListLoaded(
             pokemons: _allPokemons,
-            hasReachedMax: true,
+            hasReachedMax: _hasReachedMax,
           ));
         } else {
           emit(PokemonListError(failure: failure));
@@ -83,7 +81,7 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       },
           (newPokemons) {
         _offset += _limit;
-        _hasReachedMax = newPokemons.length < _limit;
+        _hasReachedMax = newPokemons.isEmpty || newPokemons.length < _limit;
         _allPokemons = [..._allPokemons, ...newPokemons];
         emit(PokemonListLoaded(
           pokemons: _allPokemons,

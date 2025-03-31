@@ -22,11 +22,11 @@ class PokemonDetailsLoaded extends PokemonDetailsState {
 
 class PokemonDetailsError extends PokemonDetailsState {
   final Failure failure;
-  final String message;
 
-   PokemonDetailsError({required this.failure})
-      : message = failure.message;
+  const PokemonDetailsError({required this.failure});
+
+  String get message => failure.message;
 
   @override
-  List<Object?> get props => [failure, message];
+  List<Object?> get props => [failure];
 }

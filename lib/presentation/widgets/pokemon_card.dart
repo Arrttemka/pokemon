@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pokemon/core/di/injection_container.dart';
 import 'package:pokemon/core/navigation/app_navigator.dart';
+import 'package:pokemon/core/theme/app_colors.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
 import '../../data/models/pokemon_model.dart';
 import 'pokemon_card_info.dart';
@@ -10,14 +10,10 @@ import 'pokemon_card_image.dart';
 
 class PokemonCard extends StatelessWidget {
   final PokemonEntity pokemon;
-  final Color cardColor;
-  final Color textColor;
 
   const PokemonCard({
     Key? key,
     required this.pokemon,
-    required this.cardColor,
-    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -30,7 +26,7 @@ class PokemonCard extends StatelessWidget {
         sl<AppNavigator>().navigateToPokemonDetails(pokemon);
       },
       child: Card(
-        color: cardColor,
+        color: AppColors.cardBackground,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.symmetric(vertical: 8),
         child: Padding(
@@ -42,7 +38,6 @@ class PokemonCard extends StatelessWidget {
                 child: PokemonCardInfo(
                   name: pokemon.name,
                   id: pokemon.id,
-                  textColor: textColor,
                 ),
               ),
               const SizedBox(width: 16),

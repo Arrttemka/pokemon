@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/core/theme/app_colors.dart';
+import 'package:pokemon/core/theme/app_text_styles.dart';
 
 class PokemonTypesWidget extends StatelessWidget {
   final List<String> types;
@@ -10,19 +12,15 @@ class PokemonTypesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textColor = Colors.white;
-
     return Wrap(
       spacing: 8.0,
       children: types.map((type) {
         return Chip(
           label: Text(
             type,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: textColor,
-            ),
+            style: AppTextStyles.pokemonType,
           ),
-          backgroundColor: Colors.grey[800],
+          backgroundColor: AppColors.chipBackground,
         );
       }).toList(),
     );
