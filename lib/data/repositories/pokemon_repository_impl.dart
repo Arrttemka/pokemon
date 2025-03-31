@@ -31,7 +31,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
             final pokemonDetail = await remoteDataSource.getPokemonDetails(pokemon.id);
             detailedPokemons.add(pokemonDetail);
           } catch (e) {
-            // Skip this pokemon and continue with others
             continue;
           }
         }
@@ -64,7 +63,11 @@ class PokemonRepositoryImpl implements PokemonRepository {
     } else {
       try {
         final localPokemon = await localDataSource.getCachedPokemonDetails(id);
-        return Right(localPokemon);
+        if (localPokemon != null) {
+          return Right(localPokemon);
+        } else {
+          return Left(CacheFailure('Pokemon details not found in cache'));
+        }
       } on CacheException catch (e) {
         return Left(CacheFailure(e.message));
       }

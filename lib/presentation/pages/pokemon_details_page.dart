@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon/core/di/injection_container.dart';
@@ -5,6 +7,8 @@ import 'package:pokemon/domain/entities/pokemon_entity.dart';
 import 'package:pokemon/presentation/cubits/pokemon_details_cubit.dart';
 import 'package:pokemon/presentation/widgets/pokemon_back_button.dart';
 import 'package:pokemon/presentation/widgets/pokemon_detail_info.dart';
+
+import '../../data/models/pokemon_model.dart';
 
 class PokemonDetailsPage extends StatelessWidget {
   final PokemonEntity pokemon;
@@ -17,6 +21,9 @@ class PokemonDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const backgroundColor = Color(0xFF3C2C2C);
+    final pokemonModel = pokemon is PokemonModel ? pokemon as PokemonModel : null;
+    final hasLocalImage = pokemonModel?.localImagePath != null &&
+        File(pokemonModel!.localImagePath!).existsSync();
 
     return BlocProvider(
       create: (_) => sl<PokemonDetailsCubit>()..loadPokemonDetails(pokemon.id),
@@ -69,7 +76,6 @@ class PokemonDetailsPage extends StatelessWidget {
                 );
               }
 
-              // Fallback
               return const Center(child: Text('Something went wrong', style: TextStyle(color: Colors.white)));
             },
           ),

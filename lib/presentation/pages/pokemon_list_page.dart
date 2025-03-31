@@ -82,7 +82,6 @@ class _PokemonListPageState extends State<PokemonListPage> {
                 );
               }
 
-              // Get pokemons list based on state
               final pokemons = state is PokemonListLoading
                   ? state.pokemons
                   : state is PokemonListLoaded
@@ -140,7 +139,6 @@ class _PokemonListPageState extends State<PokemonListPage> {
                         delegate: SliverChildBuilderDelegate(
                               (context, index) {
                             if (index >= pokemons.length) {
-                              // Show bottom loader
                               if (state is PokemonListLoading && !state.isFirstFetch) {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 16.0),

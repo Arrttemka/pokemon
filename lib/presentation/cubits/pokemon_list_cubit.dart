@@ -19,7 +19,6 @@ class PokemonListCubit extends Cubit<PokemonListState> {
   Future<void> loadMorePokemons() async {
     if (state is PokemonListLoading || _hasReachedMax) return;
 
-    // Start loading
     if (state is PokemonListLoaded) {
       emit(PokemonListLoading(
           pokemons: _allPokemons,
