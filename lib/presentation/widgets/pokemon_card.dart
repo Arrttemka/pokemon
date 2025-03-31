@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/pokemon_entity.dart';
-import '../pages/pokemon_details_page.dart';
+import 'package:pokemon/core/di/injection_container.dart';
+import 'package:pokemon/core/navigation/app_navigator.dart';
+import 'package:pokemon/domain/entities/pokemon_entity.dart';
 import 'pokemon_card_info.dart';
 import 'pokemon_card_image.dart';
 
@@ -20,12 +21,7 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PokemonDetailsPage(pokemon: pokemon),
-          ),
-        );
+        sl<AppNavigator>().navigateToPokemonDetails(pokemon);
       },
       child: Card(
         color: cardColor,
