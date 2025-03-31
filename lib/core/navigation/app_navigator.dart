@@ -1,4 +1,3 @@
-// Файл: lib/core/navigation/app_navigator.dart
 import 'package:flutter/material.dart';
 import 'package:pokemon/core/navigation/app_routes.dart';
 import 'package:pokemon/core/navigation/route_arguments.dart';

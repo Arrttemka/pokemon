@@ -40,7 +40,6 @@ class PokemonListItemModel {
   }
 
   int get id {
-    // Extract ID from URL
     final uri = Uri.parse(url);
     final pathSegments = uri.pathSegments;
     final idString = pathSegments[pathSegments.length - 2];

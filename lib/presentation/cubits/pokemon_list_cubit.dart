@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
+import 'package:pokemon/domain/failures/failures.dart';
 import 'package:pokemon/domain/usecases/get_pokemon_list.dart';
 
 part 'pokemon_list_state.dart';
@@ -19,7 +20,6 @@ class PokemonListCubit extends Cubit<PokemonListState> {
   Future<void> loadMorePokemons() async {
     if (state is PokemonListLoading || _hasReachedMax) return;
 
-    // Start loading
     if (state is PokemonListLoaded) {
       emit(PokemonListLoading(
           pokemons: _allPokemons,
@@ -29,7 +29,16 @@ class PokemonListCubit extends Cubit<PokemonListState> {
       final result = await getPokemonList(_offset, _limit);
 
       result.fold(
-            (failure) => emit(PokemonListError(message: failure.message)),
+            (failure) {
+          if (_allPokemons.isNotEmpty) {
+            emit(PokemonListLoaded(
+              pokemons: _allPokemons,
+              hasReachedMax: true,
+            ));
+          } else {
+            emit(PokemonListError(failure: failure));
+          }
+        },
             (newPokemons) {
           _offset += _limit;
           _hasReachedMax = newPokemons.isEmpty;
@@ -62,7 +71,16 @@ class PokemonListCubit extends Cubit<PokemonListState> {
     final result = await getPokemonList(_offset, _limit);
 
     result.fold(
-          (failure) => emit(PokemonListError(message: failure.message)),
+          (failure) {
+        if (_allPokemons.isNotEmpty && !refresh) {
+          emit(PokemonListLoaded(
+            pokemons: _allPokemons,
+            hasReachedMax: true,
+          ));
+        } else {
+          emit(PokemonListError(failure: failure));
+        }
+      },
           (newPokemons) {
         _offset += _limit;
         _hasReachedMax = newPokemons.length < _limit;

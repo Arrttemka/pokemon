@@ -10,5 +10,14 @@ class NetworkInfoImpl implements NetworkInfo {
   NetworkInfoImpl(this.connectionChecker);
 
   @override
-  Future<bool> get isConnected => connectionChecker.hasConnection;
+  Future<bool> get isConnected async {
+    try {
+      return await connectionChecker.hasConnection.timeout(
+        const Duration(seconds: 3),
+        onTimeout: () => false,
+      );
+    } catch (_) {
+      return false;
+    }
+  }
 }

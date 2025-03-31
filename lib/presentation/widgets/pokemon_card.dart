@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pokemon/core/di/injection_container.dart';
 import 'package:pokemon/core/navigation/app_navigator.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
+import '../../data/models/pokemon_model.dart';
 import 'pokemon_card_info.dart';
 import 'pokemon_card_image.dart';
 
@@ -19,6 +22,9 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonModel = pokemon is PokemonModel ? pokemon as PokemonModel : null;
+    final localImagePath = pokemonModel?.localImagePath;
+
     return GestureDetector(
       onTap: () {
         sl<AppNavigator>().navigateToPokemonDetails(pokemon);
@@ -40,7 +46,10 @@ class PokemonCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 16),
-              PokemonCardImage(imageUrl: pokemon.imageUrl),
+              PokemonCardImage(
+                imageUrl: pokemon.imageUrl,
+                localImagePath: localImagePath,
+              ),
             ],
           ),
         ),
