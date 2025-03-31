@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/core/theme/app_text_styles.dart';
 
 class PokemonCardInfo extends StatelessWidget {
   final String name;
   final int id;
-  final Color textColor;
 
   const PokemonCardInfo({
     Key? key,
     required this.name,
     required this.id,
-    required this.textColor,
   }) : super(key: key);
 
   @override
@@ -19,17 +18,13 @@ class PokemonCardInfo extends StatelessWidget {
       children: [
         Text(
           name,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: textColor,
-          ),
+          style: AppTextStyles.cardTitle,
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 4),
         Text(
           '#$id',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: textColor.withOpacity(0.7),
-          ),
+          style: AppTextStyles.cardSubtitle,
         ),
       ],
     );

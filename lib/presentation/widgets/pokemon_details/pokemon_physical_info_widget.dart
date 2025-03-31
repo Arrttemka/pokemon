@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/core/theme/app_text_styles.dart';
 
 class PokemonPhysicalInfoWidget extends StatelessWidget {
   final double weight;
@@ -12,22 +13,16 @@ class PokemonPhysicalInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textColor = Colors.white;
-
     return Column(
       children: [
         Text(
           'Weight: $weight kg',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: textColor,
-          ),
+          style: AppTextStyles.physicalInfo,
         ),
         const SizedBox(height: 8),
         Text(
           'Height: $height cm',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: textColor,
-          ),
+          style: AppTextStyles.physicalInfo,
         ),
       ],
     );

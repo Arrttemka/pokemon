@@ -37,11 +37,11 @@ class PokemonListLoaded extends PokemonListState {
 
 class PokemonListError extends PokemonListState {
   final Failure failure;
-  final String message;
 
-  PokemonListError({required this.failure})
-      : message = failure.message;
+  const PokemonListError({required this.failure});
+
+  String get message => failure.message;
 
   @override
-  List<Object?> get props => [failure, message];
+  List<Object?> get props => [failure];
 }
