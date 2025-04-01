@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon/core/navigation/app_routes.dart';
 import 'package:pokemon/core/navigation/route_arguments.dart';
-import 'package:pokemon/presentation/features/pokemon_list/widgets/pokemon_details_page.dart';
+import 'package:pokemon/presentation/pages/pokemon_details_page.dart';
 import 'package:pokemon/presentation/pages/pokemon_list_page.dart';
 
 class RouteGenerator {
