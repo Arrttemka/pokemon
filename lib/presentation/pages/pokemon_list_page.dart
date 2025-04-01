@@ -85,7 +85,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
                         onPressed: () {
                           _pokemonListCubit.loadPokemonList(refresh: true);
                         },
-                        child: const Text('Retry', style: AppTextStyles.button),
+                        child: const Text('Retry', style: AppTextStyles.retryButton),
                       ),
                     ],
                   ),

@@ -71,4 +71,10 @@ class AppTextStyles {
     fontSize: 16,
     color: AppColors.textPrimary,
   );
+
+  static const TextStyle retryButton = TextStyle(
+    color: AppColors.buttonText,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 }

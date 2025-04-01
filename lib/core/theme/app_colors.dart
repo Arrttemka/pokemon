@@ -20,4 +20,6 @@ class AppColors {
   static const Color chipBackground = Color(0xFF424242);
   static const Color iconColor = Colors.white54;
   static const Color backButtonColor = textPrimary;
+
+  static const Color buttonText = Colors.black;
 }
