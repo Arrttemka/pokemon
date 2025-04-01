@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon/presentation/widgets/pokemon_back_button.dart';
+import 'package:pokemon/core/di/injection_container.dart';
+import 'package:pokemon/core/navigation/app_navigator.dart';
+import 'package:pokemon/core/theme/app_colors.dart';
 
 class PokemonDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -8,7 +10,7 @@ class PokemonDetailsAppBar extends StatelessWidget implements PreferredSizeWidge
   const PokemonDetailsAppBar({
     Key? key,
     this.title = 'Pokemon Detail',
-    this.backgroundColor = const Color(0xFF3C2C2C),
+    this.backgroundColor = AppColors.primary,
   }) : super(key: key);
 
   @override
@@ -17,12 +19,17 @@ class PokemonDetailsAppBar extends StatelessWidget implements PreferredSizeWidge
       title: Text(
         title,
         style: const TextStyle(
-          color: Colors.white,
+          color: AppColors.textPrimary,
         ),
       ),
       backgroundColor: backgroundColor,
       elevation: 0,
-      leading: const PokemonBackButton(),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: AppColors.backButtonColor),
+        onPressed: () {
+          sl<AppNavigator>().goBack();
+        },
+      ),
     );
   }
 
