@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
-import 'package:pokemon/presentation/cubits/pokemon_details_cubit.dart';
-import 'package:pokemon/presentation/widgets/pokemon_details/pokemon_details_content.dart';
-import 'package:pokemon/presentation/widgets/pokemon_details/pokemon_details_error.dart' as widgets;
-import 'package:pokemon/presentation/widgets/pokemon_details/pokemon_details_loading.dart' as widgets;
+import 'package:pokemon/presentation/features/pokemon_details/cubit/pokemon_details_cubit.dart';
+import 'pokemon_details_content.dart';
+import 'pokemon_details_error.dart' as widgets;
+import 'pokemon_details_loading.dart' as widgets;
+
 
 class PokemonDetailsStateBuilder extends StatelessWidget {
   final PokemonDetailsState state;

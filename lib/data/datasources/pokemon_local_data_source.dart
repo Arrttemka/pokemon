@@ -1,9 +1,7 @@
-import 'dart:convert';
 import 'package:pokemon/core/error/exceptions.dart';
 import 'package:pokemon/data/models/pokemon_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pokemon/data/mappers/pokemon_mapper.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 import '../../core/services/image_cache_service.dart';
 
@@ -22,7 +20,6 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
     required this.database,
     required this.imageCacheService,
   });
-
 
   @override
   Future<void> cachePokemonList(List<PokemonModel> pokemonModels) async {
@@ -46,7 +43,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
 
             await txn.insert(
               'pokemons',
-              pokemonWithLocalImage.toMap(),
+              PokemonMapper.toMap(pokemonWithLocalImage),
               conflictAlgorithm: ConflictAlgorithm.replace,
             );
           } catch (e) {
@@ -58,6 +55,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
       throw CacheException('Failed to cache pokemons: $e');
     }
   }
+
   @override
   Future<List<PokemonModel>> getCachedPokemonList() async {
     try {
@@ -67,7 +65,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
         throw CacheException('No cached pokemons found');
       }
 
-      return maps.map((map) => PokemonModel.fromMap(map)).toList();
+      return maps.map((map) => PokemonMapper.fromMap(map)).toList();
     } catch (e) {
       throw CacheException('Failed to get cached pokemons: $e');
     }
@@ -86,7 +84,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
         return null;
       }
 
-      return PokemonModel.fromMap(maps.first);
+      return PokemonMapper.fromMap(maps.first);
     } catch (e) {
       throw CacheException('Failed to get cached pokemon details: $e');
     }
@@ -111,7 +109,7 @@ class PokemonLocalDataSourceImpl implements PokemonLocalDataSource {
 
       await database.insert(
         'pokemons',
-        pokemonWithLocalImage.toMap(),
+        PokemonMapper.toMap(pokemonWithLocalImage),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     } catch (e) {

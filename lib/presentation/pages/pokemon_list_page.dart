@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon/core/di/injection_container.dart';
 import 'package:pokemon/core/theme/app_colors.dart';
 import 'package:pokemon/core/theme/app_text_styles.dart';
-import 'package:pokemon/presentation/cubits/pokemon_list_cubit.dart';
-import 'package:pokemon/presentation/widgets/pokemon_list/pokemon_card.dart';
-import 'package:pokemon/presentation/widgets/pokemon_list/pokemon_list_header_widget.dart';
+import '../features/pokemon_list/cubit/pokemon_list_cubit.dart';
+import '../features/pokemon_list/widgets/pokemon_card.dart';
+import '../features/pokemon_list/widgets/pokemon_list_header_widget.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({Key? key}) : super(key: key);
