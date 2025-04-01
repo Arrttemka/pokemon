@@ -2,12 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
 import 'package:pokemon/domain/failures/failures.dart';
-import 'package:pokemon/domain/usecases/get_pokemon_details.dart';
+import 'package:pokemon/domain/usecases/get_pokemon_details_use_case.dart';
 
 part 'pokemon_details_state.dart';
 
 class PokemonDetailsCubit extends Cubit<PokemonDetailsState> {
-  final GetPokemonDetails getPokemonDetails;
+  final GetPokemonDetailsUseCase getPokemonDetails;
 
   PokemonDetailsCubit({required this.getPokemonDetails})
       : super(PokemonDetailsInitial());

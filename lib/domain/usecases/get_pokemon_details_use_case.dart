@@ -3,12 +3,12 @@ import '../entities/pokemon_entity.dart';
 import '../failures/failures.dart';
 import '../repositories/pokemon_repository.dart';
 
-class GetPokemonList {
+class GetPokemonDetailsUseCase {
   final PokemonRepository repository;
 
-  GetPokemonList(this.repository);
+  GetPokemonDetailsUseCase(this.repository);
 
-  Future<Either<Failure, List<PokemonEntity>>> call(int offset, int limit) {
-    return repository.getPokemonList(offset, limit);
+  Future<Either<Failure, PokemonEntity>> call(int id) {
+    return repository.getPokemonDetails(id);
   }
 }

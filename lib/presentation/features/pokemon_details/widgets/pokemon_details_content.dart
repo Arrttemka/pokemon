@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
-import 'package:pokemon/presentation/widgets/pokemon_details/pokemon_detail_info.dart';
+import 'pokemon_detail_info.dart';
 
 class PokemonDetailsContent extends StatelessWidget {
   final PokemonEntity pokemon;

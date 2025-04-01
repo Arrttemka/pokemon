@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon/core/di/injection_container.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
-import 'package:pokemon/presentation/cubits/pokemon_details_cubit.dart';
+import 'package:pokemon/presentation/features/pokemon_details/cubit/pokemon_details_cubit.dart';
 import 'package:pokemon/presentation/widgets/index.dart';
 
 class PokemonDetailsPage extends StatelessWidget {

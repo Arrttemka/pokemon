@@ -2,12 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pokemon/domain/entities/pokemon_entity.dart';
 import 'package:pokemon/domain/failures/failures.dart';
-import 'package:pokemon/domain/usecases/get_pokemon_list.dart';
+import 'package:pokemon/domain/usecases/get_pokemon_list_use_case.dart';
 
 part 'pokemon_list_state.dart';
 
+
 class PokemonListCubit extends Cubit<PokemonListState> {
-  final GetPokemonList getPokemonList;
+  final GetPokemonListUseCase getPokemonList;
 
   PokemonListCubit({required this.getPokemonList})
       : super(PokemonListInitial());

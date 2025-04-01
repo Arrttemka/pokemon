@@ -10,10 +10,10 @@ import 'package:pokemon/data/datasources/pokemon_local_data_source.dart';
 import 'package:pokemon/data/datasources/pokemon_remote_data_source.dart';
 import 'package:pokemon/data/repositories/pokemon_repository_impl.dart';
 import 'package:pokemon/domain/repositories/pokemon_repository.dart';
-import 'package:pokemon/domain/usecases/get_pokemon_details.dart';
-import 'package:pokemon/domain/usecases/get_pokemon_list.dart';
-import 'package:pokemon/presentation/cubits/pokemon_details_cubit.dart';
-import 'package:pokemon/presentation/cubits/pokemon_list_cubit.dart';
+import 'package:pokemon/domain/usecases/get_pokemon_details_use_case.dart';
+import 'package:pokemon/domain/usecases/get_pokemon_list_use_case.dart';
+import 'package:pokemon/presentation/features/pokemon_details/cubit/pokemon_details_cubit.dart';
+import 'package:pokemon/presentation/features/pokemon_list/cubit/pokemon_list_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -47,8 +47,8 @@ Future<void> initDependencies() async {
     networkInfo: sl(),
   ));
 
-  sl.registerLazySingleton(() => GetPokemonList(sl()));
-  sl.registerLazySingleton(() => GetPokemonDetails(sl()));
+  sl.registerLazySingleton(() => GetPokemonListUseCase(sl()));
+  sl.registerLazySingleton(() => GetPokemonDetailsUseCase(sl()));
 
   sl.registerFactory(() => PokemonListCubit(getPokemonList: sl()));
   sl.registerFactory(() => PokemonDetailsCubit(getPokemonDetails: sl()));
