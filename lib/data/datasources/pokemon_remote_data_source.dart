@@ -7,12 +7,9 @@ import 'package:pokemon/data/mappers/pokemon_mapper.dart';
 import 'package:pokemon/data/mappers/pokemon_list_mapper.dart';
 
 abstract class PokemonRemoteDataSource {
-  /// Gets the list of pokemons from the API
-  /// Throws a [ServerException] for all error codes
+
   Future<PokemonListResponseModel> getPokemonList(int offset, int limit);
 
-  /// Gets the details of a specific pokemon by id
-  /// Throws a [ServerException] for all error codes
   Future<PokemonModel> getPokemonDetails(int id);
 }
 
