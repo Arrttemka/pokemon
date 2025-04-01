@@ -10,17 +10,6 @@ class PokemonListResponseModel {
     this.previous,
     required this.results,
   });
-
-  factory PokemonListResponseModel.fromJson(Map<String, dynamic> json) {
-    return PokemonListResponseModel(
-      count: json['count'],
-      next: json['next'],
-      previous: json['previous'],
-      results: (json['results'] as List)
-          .map((result) => PokemonListItemModel.fromJson(result))
-          .toList(),
-    );
-  }
 }
 
 class PokemonListItemModel {
@@ -31,13 +20,6 @@ class PokemonListItemModel {
     required this.name,
     required this.url,
   });
-
-  factory PokemonListItemModel.fromJson(Map<String, dynamic> json) {
-    return PokemonListItemModel(
-      name: json['name'],
-      url: json['url'],
-    );
-  }
 
   int get id {
     final uri = Uri.parse(url);

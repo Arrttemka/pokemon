@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:pokemon/core/error/exceptions.dart';
 import 'package:pokemon/data/models/pokemon_list_response_model.dart';
 import 'package:pokemon/data/models/pokemon_model.dart';
+import 'package:pokemon/data/mappers/pokemon_mapper.dart';
+import 'package:pokemon/data/mappers/pokemon_list_mapper.dart';
 
 abstract class PokemonRemoteDataSource {
   /// Gets the list of pokemons from the API
@@ -28,7 +30,7 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      return PokemonListResponseModel.fromJson(json.decode(response.body));
+      return PokemonListMapper.fromJson(json.decode(response.body));
     } else {
       throw ServerException(
           'Failed to load pokemons. Status code: ${response.statusCode}');
@@ -43,7 +45,7 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      return PokemonModel.fromJson(json.decode(response.body));
+      return PokemonMapper.fromJson(json.decode(response.body));
     } else {
       throw ServerException(
           'Failed to load pokemon details. Status code: ${response.statusCode}');
